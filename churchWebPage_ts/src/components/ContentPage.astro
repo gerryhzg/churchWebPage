@@ -1,0 +1,16 @@
+---
+import type { PageContent } from "@/data/pages";
+
+interface Props {
+  page: PageContent;
+}
+
+const { page } = Astro.props;
+---
+
+<article class="content-page">
+  <header class="entry-header">
+    <h1>{page.title}</h1>
+  </header>
+  <div class="entry-content" set:html={page.content} />
+</article>

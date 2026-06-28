@@ -1,0 +1,54 @@
+---
+import type { NavItem } from "@/data/site";
+import { siteConfig } from "@/data/site";
+
+const renderHref = (href: string) => href;
+---
+
+<header class="site-header">
+  <div class="wrap title-area">
+    <a class="site-title" href="/">{siteConfig.title}</a>
+    <p class="site-description">{siteConfig.description}</p>
+  </div>
+</header>
+
+<nav class="site-nav" aria-label="Primary navigation">
+  <div class="wrap">
+    <details class="mobile-nav">
+      <summary>菜单</summary>
+      <ul>
+        {siteConfig.navItems.map((item: NavItem) => (
+          <li>
+            <a href={renderHref(item.href)}>{item.label}</a>
+            {item.children && (
+              <ul>
+                {item.children.map((child) => (
+                  <li><a href={renderHref(child.href)}>{child.label}</a></li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))}
+      </ul>
+    </details>
+
+    <ul class="desktop-nav">
+      {siteConfig.navItems.map((item: NavItem) => (
+        <li>
+          <a href={renderHref(item.href)}>{item.label}</a>
+          {item.children && (
+            <ul class="sub-menu">
+              {item.children.map((child) => (
+                <li><a href={renderHref(child.href)}>{child.label}</a></li>
+              ))}
+            </ul>
+          )}
+        </li>
+      ))}
+    </ul>
+  </div>
+</nav>
+
+<div class="header-photo wrap">
+  <img src={siteConfig.headerImage} alt={siteConfig.description} />
+</div>

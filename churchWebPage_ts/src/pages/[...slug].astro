@@ -1,0 +1,20 @@
+---
+import ContentPage from "@/components/ContentPage.astro";
+import SiteLayout from "@/layouts/SiteLayout.astro";
+import { pages } from "@/data/pages";
+
+export function getStaticPaths() {
+  return pages
+    .filter((page) => page.slug !== "")
+    .map((page) => ({
+      params: { slug: page.slug },
+      props: { page },
+    }));
+}
+
+const { page } = Astro.props;
+---
+
+<SiteLayout title={page.title}>
+  <ContentPage page={page} />
+</SiteLayout>

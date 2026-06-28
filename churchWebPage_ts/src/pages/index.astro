@@ -1,0 +1,14 @@
+---
+import ContentPage from "@/components/ContentPage.astro";
+import SiteLayout from "@/layouts/SiteLayout.astro";
+import { getPageBySlug } from "@/data/pages";
+
+const page = getPageBySlug("");
+if (!page) {
+  throw new Error("Home page content was not generated.");
+}
+---
+
+<SiteLayout title={page.title}>
+  <ContentPage page={page} />
+</SiteLayout>
